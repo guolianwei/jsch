@@ -1567,6 +1567,9 @@ public class ChannelSftp extends ChannelSession{
    public void ls(String path, LsEntrySelector selector) throws SftpException{
      //System.out.println("ls: "+path);
      try{
+	if (io_in == null) {
+            throw new JSchException("channel is down or not be connected");
+	}
        ((MyPipedInputStream)io_in).updateReadSide();
 
        path=remoteAbsolutePath(path);
